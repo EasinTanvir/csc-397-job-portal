@@ -1,0 +1,72 @@
+.dashboard-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+h2,
+h3 {
+  text-align: center;
+  color: #4a148c;
+}
+
+.form-container {
+  margin-bottom: 2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input,
+textarea,
+select,
+button {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  background: #4a148c;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #7b1fa2;
+}
+
+.jobs-list {
+  margin-top: 2rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+table th {
+  background: #4a148c;
+  color: white;
+}
+
+a {
+  color: #4a148c;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
