@@ -8,14 +8,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $query = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-    $query->bind_param("sss", $username, $email, $password);
+    // Check if the email already exists
+    $check_email_query = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
+    $check_email_query->bind_param("s", $email);
+    $check_email_query->execute();
+    $check_email_query->bind_result($email_exists);
+    $check_email_query->fetch();
+    $check_email_query->close();
 
-    if ($query->execute()) {
-        header("Location: login.php");
-        exit;
+    if ($email_exists > 0) {
+        $message = "Error: The email is already registered.";
     } else {
-        $message = "Error: " . $query->error;
+        // Proceed to insert the user if email doesn't exist
+        $query = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+        $query->bind_param("sss", $username, $email, $password);
+
+        if ($query->execute()) {
+            header("Location: login.php");
+            exit;
+        } else {
+            $message = "Error: " . $query->error;
+        }
     }
 }
 ?>

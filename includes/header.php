@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+function isActive($link)
+{
+    return basename($_SERVER['PHP_SELF']) === $link ? 'active' : '';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,16 +19,16 @@ session_start();
 <body>
     <header>
         <nav class="navbar">
-            <a href="index.php" class="logo">JobPortal</a>
+            <a href="index.php" class="logo">Job<span>Portal</span></a>
             <ul class="nav-links">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php" class="<?= isActive('index.php') ?>">Home</a></li>
                 <?php if (isset($_SESSION['user_id'])): ?>
-                <li><a href="profile.php">Profile</a></li>
-                <li><a href="dashboard.php">Dashboard</a></li>
-                <li><a href="logout.php">Logout</a></li>
+                <li><a href="profile.php" class="<?= isActive('profile.php') ?>">Profile</a></li>
+                <li><a href="dashboard.php" class="<?= isActive('dashboard.php') ?>">Dashboard</a></li>
+                <li><a href="logout.php" class="<?= isActive('logout.php') ?>">Logout</a></li>
                 <?php else: ?>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="register.php">Register</a></li>
+                <li><a href="login.php" class="<?= isActive('login.php') ?>">Login</a></li>
+                <li><a href="register.php" class="<?= isActive('register.php') ?>">Register</a></li>
                 <?php endif; ?>
             </ul>
         </nav>

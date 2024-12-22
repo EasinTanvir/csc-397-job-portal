@@ -1,42 +1,50 @@
+/* Main Job Details Page */
 .job-details {
   max-width: 800px;
   margin: 50px auto;
   padding: 20px;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
   background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .job-details h1 {
-  font-size: 2em;
+  font-size: 2.5em;
   margin-bottom: 20px;
-  color: #333;
+  color: #4a148c;
+  font-weight: bold;
 }
 
 .job-details p {
-  font-size: 1.2em;
+  font-size: 1.1em;
   margin: 10px 0;
   color: #555;
+  line-height: 1.6;
 }
 
 .job-details .btn {
   display: inline-block;
   margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
+  padding: 12px 25px;
+  background-color: #4a148c;
   color: white;
   text-decoration: none;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1em;
+  font-size: 1.1em;
   text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .job-details .btn:hover {
-  background-color: #0056b3;
+  background-color: #7b1fa2;
+  transform: scale(1.05);
 }
+
+/* Modal for Application Form */
 .modal {
   display: none;
   position: fixed;
@@ -45,55 +53,85 @@
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 50%;
-  border-radius: 10px;
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 25px;
+  border-radius: 12px;
+  width: 60%;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .close {
   color: #aaa;
-  float: right;
   font-size: 28px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: #000;
   text-decoration: none;
-  cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 form label {
-  display: block;
-  margin: 10px 0 5px;
+  font-size: 1.1em;
+  color: #333;
 }
 
 form input {
-  width: 100%;
-  padding: 10px;
+  padding: 12px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+form input:focus {
+  border-color: #4a148c;
+  outline: none;
 }
 
 form button {
   background-color: #4caf50;
   color: white;
-  padding: 10px 15px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  font-size: 1.1em;
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 form button:hover {
   background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .job-details {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  .job-details h1 {
+    font-size: 2em;
+  }
+
+  .modal-content {
+    width: 80%;
+  }
 }

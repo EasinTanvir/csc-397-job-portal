@@ -35,3 +35,74 @@
 .login-container button:hover {
   background-color: #7b1fa2;
 }
+/* Container styling */
+.login-container {
+  max-width: 400px;
+  margin: 15rem auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.login-container h2 {
+  text-align: center;
+  color: #4a148c;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.login-container .error {
+  color: red;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+/* Form styling */
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Input field styling */
+.login-container input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.login-container input:focus {
+  border-color: #4a148c;
+  box-shadow: 0 0 5px rgba(74, 20, 140, 0.3);
+}
+
+/* Button styling */
+.login-container button {
+  padding: 0.75rem;
+  border: none;
+  background-color: #4a148c;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.login-container button:hover {
+  background-color: #7b1fa2;
+  transform: scale(1.05);
+}
+
+/* Button focus effect */
+.login-container button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(74, 20, 140, 0.3);
+}

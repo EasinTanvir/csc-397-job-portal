@@ -118,12 +118,12 @@ $jobs = $query->get_result();
 
     <!-- Job List -->
     <div class="jobs-list">
-        <h3>Your Jobs</h3>
+        <h3>Your Craeted Jobs List</h3>
         <?php if ($jobs->num_rows > 0): ?>
         <table>
             <thead>
                 <tr>
-                    <th>Title</th>
+                    <th>Titles</th>
                     <th>Type</th>
                     <th>Salary</th>
                     <th>Shift</th>

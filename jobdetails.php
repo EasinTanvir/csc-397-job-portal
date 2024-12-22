@@ -23,7 +23,7 @@ $job = $result->fetch_assoc();
 
 <div class="job-details">
     <h1><?= htmlspecialchars($job['title']) ?></h1>
-    <p><?= htmlspecialchars($job['description']) ?></p>
+    <p class="description"><?= htmlspecialchars($job['description']) ?></p>
     <p><strong>Type:</strong> <?= htmlspecialchars($job['type']) ?></p>
     <p><strong>Salary:</strong> $<?= htmlspecialchars($job['salary']) ?></p>
     <p><strong>Shift:</strong> <?= htmlspecialchars($job['shift']) ?></p>
