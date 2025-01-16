@@ -136,3 +136,7 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.applicants-list {
+  margin-top: 50px;
+}

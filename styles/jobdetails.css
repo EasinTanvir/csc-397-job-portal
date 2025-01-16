@@ -120,6 +120,10 @@ form button:hover {
   transform: scale(1.05);
 }
 
+.errors {
+  color: red!;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .job-details {

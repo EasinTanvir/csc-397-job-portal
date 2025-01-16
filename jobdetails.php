@@ -18,6 +18,19 @@ if ($result->num_rows === 0) {
 }
 
 $job = $result->fetch_assoc();
+
+// Check if the logged-in user is the creator of the job
+$is_job_creator = (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $job['user_id']);
+
+// Check if the user has already applied for the job
+$has_applied_query = "SELECT * FROM applications WHERE user_id = ? AND job_id = ?";
+$has_applied_stmt = $conn->prepare($has_applied_query);
+$has_applied_stmt->bind_param('ii', $_SESSION['user_id'], $job_id);
+$has_applied_stmt->execute();
+$has_applied_result = $has_applied_stmt->get_result();
+$has_applied_stmt->close();
+
+$has_applied = $has_applied_result->num_rows > 0; // True if the user has already applied
 ?>
 <link rel="stylesheet" href="styles/jobdetails.css">
 
@@ -29,9 +42,15 @@ $job = $result->fetch_assoc();
     <p><strong>Shift:</strong> <?= htmlspecialchars($job['shift']) ?></p>
 
     <?php if (isset($_SESSION['user_id'])): ?>
-    <button onclick="openApplicationForm()" class="btn">Apply</button>
+        <?php if ($is_job_creator): ?>
+            <p style="color: red;"> You cannot apply for your own job*</p>
+        <?php elseif ($has_applied): ?>
+            <p style="color: red;">You have already applied for this job*</p> <!-- Message for already applied -->
+        <?php else: ?>
+            <button onclick="openApplicationForm()" class="btn">Apply</button>
+        <?php endif; ?>
     <?php else: ?>
-    <a href="login.php" class="btn">Login to Apply</a>
+        <a href="login.php" class="btn">Login to Apply</a>
     <?php endif; ?>
 </div>
 

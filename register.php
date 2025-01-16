@@ -1,4 +1,6 @@
 <?php
+session_start(); // Start the session
+
 include 'includes/header.php';
 include 'includes/db.php';
 
@@ -24,7 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $query->bind_param("sss", $username, $email, $password);
 
         if ($query->execute()) {
-            header("Location: login.php");
+            $_SESSION['account_created'] = 'Account created successfully!'; // Set session message
+            header("Location: login.php"); // Redirect to login page
             exit;
         } else {
             $message = "Error: " . $query->error;
@@ -32,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 <link rel="stylesheet" href="styles/login.css">
 <div class="login-container">
     <h2>Register</h2>

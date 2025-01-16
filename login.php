@@ -1,4 +1,6 @@
 <?php
+session_start(); // Start the session
+
 include 'includes/header.php';
 include 'includes/db.php';
 
@@ -25,7 +27,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = "Invalid credentials";
     }
 }
+
+// Check if account creation was successful
+if (isset($_SESSION['account_created'])) {
+    echo '<script>alert("' . $_SESSION['account_created'] . '");</script>';
+    unset($_SESSION['account_created']); // Clear the session variable after showing the message
+}
 ?>
+
 <link rel="stylesheet" href="styles/login.css">
 <div class="login-container">
     <h2>Login</h2>

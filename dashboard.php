@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_job'])) {
     $shift = $_POST['shift'];
 
     $query = $conn->prepare("UPDATE jobs SET title = ?, description = ?, type = ?, salary = ?, shift = ? WHERE id = ? AND user_id = ?");
-$query->bind_param("sssissi", $title, $description, $type, $salary, $shift, $job_id, $user_id);
+    $query->bind_param("sssissi", $title, $description, $type, $salary, $shift, $job_id, $user_id);
 
     if ($query->execute()) {
         $message = "Job updated successfully!";
@@ -80,6 +80,17 @@ $query = $conn->prepare("SELECT * FROM jobs WHERE user_id = ?");
 $query->bind_param("i", $user_id);
 $query->execute();
 $jobs = $query->get_result();
+
+// Fetch applicants for each job
+$applicants_query = $conn->prepare("
+    SELECT a.*, u.username, j.title AS job_title 
+    FROM applications a 
+    JOIN users u ON a.user_id = u.id 
+    JOIN jobs j ON a.job_id = j.id 
+    WHERE j.user_id = ?");
+$applicants_query->bind_param("i", $user_id);
+$applicants_query->execute();
+$applicants = $applicants_query->get_result();
 ?>
 
 <link rel="stylesheet" href="styles/dashboard.css">
@@ -118,12 +129,12 @@ $jobs = $query->get_result();
 
     <!-- Job List -->
     <div class="jobs-list">
-        <h3>Your Craeted Jobs List</h3>
+        <h3>Your Created Jobs List</h3>
         <?php if ($jobs->num_rows > 0): ?>
         <table>
             <thead>
                 <tr>
-                    <th>Titles</th>
+                    <th>Title</th>
                     <th>Type</th>
                     <th>Salary</th>
                     <th>Shift</th>
@@ -148,6 +159,39 @@ $jobs = $query->get_result();
         </table>
         <?php else: ?>
         <p>No jobs found.</p>
+        <?php endif; ?>
+    </div>
+
+    <!-- Applicants List -->
+
+    <hr>
+    <div class="applicants-list">
+        <h3>Applicants for Your Jobs</h3>
+        <?php if ($applicants->num_rows > 0): ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Applicant Name</th>
+                    <th>Email</th>
+                    <th>Expected Salary</th>
+                    <th>Applied At</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($applicant = $applicants->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo $applicant['job_title']; ?></td>
+                    <td><?php echo $applicant['username']; ?></td>
+                    <td><?php echo $applicant['email']; ?></td>
+                    <td><?php echo $applicant['expected_salary']; ?></td>
+                    <td><?php echo $applicant['applied_at']; ?></td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+        <?php else: ?>
+        <p>No applications yet.</p>
         <?php endif; ?>
     </div>
 </div>
